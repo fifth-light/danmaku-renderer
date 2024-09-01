@@ -1,0 +1,41 @@
+[package]
+name = "danmaku-renderer"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wgpu = { version = "22", optional = true }
+quick-xml = "0.36"
+bytes = "1"
+prost = "0.13"
+cosmic-text = "0.12"
+etagere = "0.2"
+cairo-rs = { version = "0.20", optional = true }
+log = "0.4"
+bytemuck = { version = "1", optional = true }
+lru = "0.12"
+regex = { version = "1", optional = true }
+
+[features]
+renderer-cairo = ["cairo-rs"]
+renderer-wgpu = ["wgpu", "bytemuck"]
+filter-regex = ["regex"]
+
+[build-dependencies]
+prost-build = "0.13"
+
+[dev-dependencies]
+gtk4 = "0.9"
+cairo-rs = { version = "0.20", features = ["png"] }
+winit = "0.30"
+env_logger = "0.11"
+fps_counter = "3"
+futures = "0.3"
+
+[[example]]
+name = "wgpu_renderer"
+required-features = ["renderer-wgpu"]
+
+[[example]]
+name = "cairo_renderer"
+required-features = ["renderer-cairo"]
